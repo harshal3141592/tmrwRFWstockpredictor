@@ -7,12 +7,19 @@ Stock price movement is notoriously hard to predict, but this project explores h
 
 ## Approach
 **Data collection**: Pulled _~18 years_ of historical Nifty 50 OHLCV data using the _yfinance_ API.
+
 **Target definition**: A binary label was created to differentiate between the high or low closing position. 1 if tomorrow's close is higher than todays, or 0 if that's not the case.
+
 **Baseline model**: We have trained a RandomForestClassifier on raw OHLCV features (Open, High, Low, Close, Volume).
+
 **Backtesting framework**: Built an expanding-window backtest (train on all data up to day i, test on the next 250 days, repeat) to simulate realistic, sequential trading conditions and avoid lookahead bias.
+
 **Feature engineering**: A rolling-window features across five horizons (2, 5, 60, 250, and 1000 days) was introduced. This helps in capturing the different speed in market behaviour. The capturing from short day span to years gives more context.
+
 **Close ratio**: current close relative to the rolling average close
+
 **Trend**: The sum of positive-movement days over the window
+
 **Threshold tuning**: Used predicted probabilities (rather than raw class predictions) with a 0.6 threshold to favor precision over recall, better suited to a risk-conscious trading use case.
 
 ## Results
