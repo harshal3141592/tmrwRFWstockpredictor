@@ -30,10 +30,10 @@ With multi-horizon rolling features + tuned threshold	0.554
 Precision was prioritized over accuracy: in a trading context, a false "buy" signal is more costly than a missed opportunity, so the model is tuned to be more confident before predicting an upward move.
 
 ## Tech Stack
-Python
-pandas
-scikit-learn (RandomForestClassifier)
-yfinance
+1. Python
+2. pandas
+3. scikit-learn (RandomForestClassifier)
+4. yfinance
 
 ### Future Improvements
 1. I might add a comparison based against gradient-boosted models (XGBoost, LightGBM)
