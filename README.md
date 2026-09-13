@@ -3,7 +3,7 @@ This is basic Random Forest Algorithm project. Here, I get the entire OHLCV data
 
 ## Overview
 
-Stock price movement is notoriously hard to predict, but this project explores how far a simple, interpretable model can get using only price/volume history and engineered technical features — with an emphasis on realistic backtesting rather than a single train/test split.
+Stock price movement is notoriously hard to predict, but this project explores how far a simple, interpretable model can get using only price/volume history and engineered technical features with an emphasis on realistic backtesting rather than a single train/test split.
 
 ## Approach
 **Data collection**: Pulled _~18 years_ of historical Nifty 50 OHLCV data using the _yfinance_ API.
@@ -28,7 +28,7 @@ Stock price movement is notoriously hard to predict, but this project explores h
 | Baseline (raw OHLCV features) | ~0.53 | ~0.54 |
 | With multi-horizon rolling features + tuned threshold | ~0.55 | ~0.54 |
 
-Precision alone doesn't mean much without a baseline to compare against: Nifty50 closes higher than the previous day roughly 54% of the time historically, so a model that did nothing but always guess "up" would already score ~0.54 precision. The baseline OHLCV model in this project actually performs *slightly below* that naive rate — indicating it isn't picking up any real directional signal from raw price/volume levels alone. The multi-horizon feature model narrowly edges past the baseline, suggesting a small but real signal from relative momentum.
+Precision alone doesn't mean much without a baseline to compare against: Nifty50 closes higher than the previous day roughly 54% of the time historically, so a model that did nothing but always guess "up" would already score ~0.54 precision. The baseline OHLCV model in this project actually performs *slightly below* that naive rate; indicating it isn't picking up any real directional signal from raw price/volume levels alone. The multi-horizon feature model narrowly edges past the baseline, suggesting a small but real signal from relative momentum.
 
 Precision was prioritized over accuracy: in a trading context, a false "buy" signal is more costly than a missed opportunity, so the model is tuned to be more confident before predicting an upward move.
 
