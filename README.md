@@ -35,10 +35,10 @@ Precision was prioritized over accuracy: in a trading context, a false "buy" sig
 > **Note:** Because this notebook pulls live Nifty50 data via `yfinance`, exact figures shift slightly on each run as the training/testing window moves forward in time. The pattern above the baseline near or below the naive rate, engineered features narrowly beating it has held consistently across recent runs.
 > 
 ## Limitations
-- No transaction costs, slippage, or brokerage fees are modeled — a real strategy would need to clear those costs, not just beat a naive baseline.
-- No position sizing or risk management — the model predicts direction only, not how much capital to risk.
-- Single-index scope — trained and tested only on Nifty50; may not generalize to individual stocks or other indices.
-- No macro, earnings, or news-based features — the model relies purely on historical price/volume patterns.
+- No transaction costs, slippage, or brokerage fees are modeled a real strategy would need each "buy" to clear brokerage and impact costs, not just beat the baseline.
+- No position sizing or risk management: the model outputs a direction, not how much capital to risk.
+- Single-index scope: trained only on Nifty50; performance may not generalize to individual stocks or other indices.
+- No macro or news features: The model only sees price/volume history, ignoring earnings, budget announcements, or global market moves.
 - The 0.6 probability threshold was chosen manually, not tuned via cross-validation.
 
 ## Tech Stack
