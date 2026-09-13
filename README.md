@@ -23,11 +23,23 @@ Stock price movement is notoriously hard to predict, but this project explores h
 **Threshold tuning**: Used predicted probabilities (rather than raw class predictions) with a 0.6 threshold to favor precision over recall, better suited to a risk-conscious trading use case.
 
 ## Results
-Model version	Precision
-Baseline (raw OHLCV features)	~0.50
-With multi-horizon rolling features + tuned threshold	0.554
+| Model version | Precision | Base rate (naive "always up") |
+|---|---|---|
+| Baseline (raw OHLCV features) | ~0.53 | ~0.54 |
+| With multi-horizon rolling features + tuned threshold | ~0.55 | ~0.54 |
+
+Precision alone doesn't mean much without a baseline to compare against: Nifty50 closes higher than the previous day roughly 54% of the time historically, so a model that did nothing but always guess "up" would already score ~0.54 precision. The baseline OHLCV model in this project actually performs *slightly below* that naive rate — indicating it isn't picking up any real directional signal from raw price/volume levels alone. The multi-horizon feature model narrowly edges past the baseline, suggesting a small but real signal from relative momentum.
 
 Precision was prioritized over accuracy: in a trading context, a false "buy" signal is more costly than a missed opportunity, so the model is tuned to be more confident before predicting an upward move.
+
+> **Note:** Because this notebook pulls live Nifty50 data via `yfinance`, exact figures shift slightly on each run as the training/testing window moves forward in time. The pattern above the baseline near or below the naive rate, engineered features narrowly beating it has held consistently across recent runs.
+> 
+## Limitations
+- No transaction costs, slippage, or brokerage fees are modeled — a real strategy would need to clear those costs, not just beat a naive baseline.
+- No position sizing or risk management — the model predicts direction only, not how much capital to risk.
+- Single-index scope — trained and tested only on Nifty50; may not generalize to individual stocks or other indices.
+- No macro, earnings, or news-based features — the model relies purely on historical price/volume patterns.
+- The 0.6 probability threshold was chosen manually, not tuned via cross-validation.
 
 ## Tech Stack
 1. Python
